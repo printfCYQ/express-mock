@@ -1,8 +1,10 @@
 const port = 3000;
 const host = 'http://localhost';
+const prefix = '/mock';
 module.exports = {
     port,
     host,
+    prefix,
     sendResponse: (res, data, timer = 0) => {
         setTimeout(() => {
             res.send({

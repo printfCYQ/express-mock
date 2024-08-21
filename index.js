@@ -2,7 +2,7 @@ const express = require('express')
 const fs = require('fs');
 const path = require('path');
 const app = express()
-const { port, host } = require('./utils')
+const { port, host, prefix } = require('./utils')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -15,13 +15,13 @@ function loadRoutesFromFolder(app, folderPath) {
       loadRoutesFromFolder(app, filePath);
     } else if (fileName.endsWith('.js')) {
       const routeModule = require('./' + filePath);
-      app.use('/mock', routeModule);
+      app.use(prefix, routeModule);
     }
   });
 }
 loadRoutesFromFolder(app, './router');
 
-app.get('/mock/testGet', (req, res) => {
+app.get(prefix + '/testGet', (req, res) => {
   res.send({
     data: {
       a: 'get'
@@ -29,7 +29,7 @@ app.get('/mock/testGet', (req, res) => {
   })
 })
 
-app.post('/mock/testPost', (req, res) => {
+app.post(prefix + '/testPost', (req, res) => {
   res.send({
     data: {
       a: 'psot'

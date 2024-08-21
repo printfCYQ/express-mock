@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { sendResponse, host, port } = require('../utils')
+const { sendResponse, host, port, prefix } = require('../utils')
 const Mock = require('mockjs')
 const Random = Mock.Random
 
@@ -14,7 +14,7 @@ const API_URL_LIST = {
 
 console.log('🥳🥳🥳-----------------------------------')
 Object.keys(API_URL_LIST).forEach(key => {
-    console.log(`${host}:${port}${API_URL_LIST[key]}`);
+    console.log(`${host}:${port}${prefix}${API_URL_LIST[key]}`);
 });
 console.log('🥳🥳🥳-----------------------------------')
 
